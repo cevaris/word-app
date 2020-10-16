@@ -1,19 +1,11 @@
 const express = require('express');
+const dictionary = require('../cache/dictionary');
 
 const router = express.Router();
 
-const dictionary = [
-    { value: 'apple', definition: 'some fruit' },
-    { value: 'banana', definition: 'some yellow fruit' },
-    { value: 'avacado', definition: 'maybe some fruit' },
-    { value: 'stone', definition: 'is a rock' },
-    { value: 'lily', definition: 'Adams dog name' },
-    { value: 'oscar', definition: 'who the f88K is oscar' },
-];
-
 router.get("/words.json", function (req, res) {
     if (req.query.q) {
-        const query = req.query.q;
+        const query = req.query.q.toLowerCase();
         const filteredResults =
             dictionary.filter(word => word.value.includes(query));
 
