@@ -1,13 +1,7 @@
 const express = require('express');
-const app = express()
+const app = express();
 
-// use the express-static middleware
-app.use(express.static("public"))
-
-// define the first route
-app.get("/", function (req, res) {
-    res.send("<h1>Hello World!</h1>")
-})
+app.use(require('./routes/root'));
 
 // start the server listening for requests
 app.listen(process.env.PORT || 3000,
