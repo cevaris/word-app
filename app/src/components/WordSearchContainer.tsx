@@ -1,12 +1,22 @@
+import { IonSearchbar } from '@ionic/react';
 import React from 'react';
+import { getWords } from '../actions/words';
 
 interface ContainerProps { }
 
 const WordSearchContainer: React.FC<ContainerProps> = () => {
+
+  const setSearchText = async (query: string | undefined) => {
+    if (query) {
+      console.log('setSearchText', query);
+      const results = await getWords(query);
+      console.log(results);
+    }
+  }
+
   return (
-    <div className="container">
-      <strong>Ready to create an app?</strong>
-      <p>Start with Ionic <a target="_blank" rel="noopener noreferrer" href="https://ionicframework.com/docs/components">UI Components</a></p>
+    <div>
+      <IonSearchbar onIonChange={e => setSearchText(e.detail.value)}></IonSearchbar>
     </div>
   );
 };
