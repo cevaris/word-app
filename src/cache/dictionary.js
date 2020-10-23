@@ -7,12 +7,12 @@ const dictionary = [];
 axios
     .get(dictionaryURL)
     .then(response => {
+
         // break up the files based off each newline.
         const lines = response.data.split('\r\n');
 
         lines.forEach((line) => {
             const columns = line.split(',');
-
             if (columns.length === 3) {
                 dictionary.push({
                     value: cleanup(columns[0]).toLowerCase(),
@@ -25,7 +25,7 @@ axios
 
 function cleanup(string) {
     // '"apple"' -> 'apple'
-    return string.replace(/"/g, '')
+    return string.replace(/"/g, '').trim()
 }
 
 module.exports = dictionary;
